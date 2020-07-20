@@ -3,12 +3,12 @@ import { useHistory } from 'react-router-dom';
 
 import { Form } from 'shared/components';
 import authService from 'shared/services/auth';
-import usePromiseHandler from 'shared/hooks/promiseHandler';
 import logo from '../App/assets/images/logo.png';
 import { Container, FormHeading, FormElement, Actions, ActionButton, AppLogo } from './Styles';
 
 const Authenticate = () => {
   const history = useHistory();
+  const [, signIn] = authService.signIn();
 
   const initialValues = {
     email: '',
@@ -20,13 +20,14 @@ const Authenticate = () => {
     password: [Form.is.required()],
   };
 
-  const signInHandler = usePromiseHandler(authService.signIn);
-
   const onSubmit = async (values, form) => {
-    const [res, error] = await signInHandler(values);
-    
-    if (res) history.push('/');
-    else Form.handleAPIError(error, form);
+    try {
+      await signIn(values);
+      history.push('/');
+    } catch(error) {
+      console.log(error);
+      Form.handleAPIError(error, form);
+    }
   };
 
   return (

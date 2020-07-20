@@ -1,16 +1,18 @@
-import useApi from 'shared/utils/api';
+import useApi from 'shared/hooks/api';
 import {
   storeAuthToken,
   getStoredAuthToken,
   removeStoredAuthToken
 } from 'shared/utils/authToken';
 
-const signIn = async ({ email, password }) => {
-  // REPLACE:: const { authToken } = await api.post('/authentication/signIn', { email, password });
-  const { authToken } = await useApi.post('/authentication/guest');
-  storeAuthToken(authToken);
+const signIn = () => {
+  const [obj, signInRequest] = useApi.post('/authentication/signIn');
+  const signInRequestDecorated = async (...args) => {
+    const token = await signInRequest(...args);
+    storeAuthToken(token);
+  };
   
-  return authToken;
+  return [obj, signInRequestDecorated];
 }
 
 const signOut = () => {

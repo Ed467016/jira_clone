@@ -7,7 +7,7 @@ export const List = styled.div`
   flex-direction: column;
   margin: 0 5px;
   min-height: 400px;
-  width: 25%;
+  width: 100%;
   border-radius: 3px;
   background: ${color.backgroundLightest};
 `;
@@ -21,6 +21,8 @@ export const Title = styled.div`
 `;
 
 export const IssuesCount = styled.span`
+  display: inline-block;
+  margin-left: 3px;
   text-transform: lowercase;
   ${font.size(13)};
 `;

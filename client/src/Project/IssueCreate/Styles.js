@@ -37,3 +37,12 @@ export const Actions = styled.div`
 export const ActionButton = styled(Button)`
   margin-left: 10px;
 `;
+
+export const FieldLabel = styled.label`
+  display: block;
+  padding-bottom: 5px;
+  color: ${color.textMedium};
+  margin-top: 20px;
+  ${font.medium}
+  ${font.size(18)}
+`;

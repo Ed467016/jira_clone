@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { color, font, mixin } from 'shared/utils/styles';
-import { Avatar } from 'shared/components';
 
 export const IssueLink = styled(Link)`
   display: block;
@@ -10,7 +9,9 @@ export const IssueLink = styled(Link)`
 `;
 
 export const Issue = styled.div`
-  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
   border-radius: 3px;
   background: #fff;
   box-shadow: 0px 1px 2px 0px rgba(9, 30, 66, 0.25);
@@ -38,19 +39,15 @@ export const Title = styled.p`
   }
 `;
 
-export const Bottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+export const Label = styled.p`
+  ${font.medium}
+  color: ${color.textMedium};
+  text-align: center;
+  ${font.size(18)}
 `;
 
-export const Assignees = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
-  margin-left: 2px;
+export const Left = styled.div`
 `;
 
-export const AssigneeAvatar = styled(Avatar)`
-  margin-left: -2px;
-  box-shadow: 0 0 0 2px #fff;
+export const Right = styled.div`
 `;

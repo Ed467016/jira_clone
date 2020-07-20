@@ -1,24 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DragDropContext } from 'react-beautiful-dnd';
-
-import useCurrentUser from 'shared/hooks/currentUser';
 import api from 'shared/utils/api';
 import { moveItemWithinArray, insertItemIntoArray } from 'shared/utils/javascript';
-import { IssueStatus } from 'shared/constants/issues';
-
 import List from './List';
 import { Lists } from './Styles';
 
 const propTypes = {
   project: PropTypes.object.isRequired,
-  filters: PropTypes.object.isRequired,
   updateLocalProjectIssues: PropTypes.func.isRequired,
 };
 
-const ProjectBoardLists = ({ project, filters, updateLocalProjectIssues }) => {
-  const { currentUserId } = useCurrentUser();
-
+const ProjectBoardLists = ({ project, updateLocalProjectIssues }) => {
   const handleIssueDrop = ({ draggableId, destination, source }) => {
     if (!isPositionChanged(source, destination)) return;
 
@@ -37,15 +30,7 @@ const ProjectBoardLists = ({ project, filters, updateLocalProjectIssues }) => {
   return (
     <DragDropContext onDragEnd={handleIssueDrop}>
       <Lists>
-        {Object.values(IssueStatus).map(status => (
-          <List
-            key={status}
-            status={status}
-            project={project}
-            filters={filters}
-            currentUserId={currentUserId}
-          />
-        ))}
+        <List project={project} />
       </Lists>
     </DragDropContext>
   );
