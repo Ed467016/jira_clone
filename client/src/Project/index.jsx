@@ -16,7 +16,6 @@ import { ProjectPage } from './Styles';
 const Project = () => {
   const match = useRouteMatch();
 
-  const issueSearchModalHelpers = createQueryParamModalHelpers('issue-search');
   const issueCreateModalHelpers = createQueryParamModalHelpers('issue-create');
   
   const [{ data, error, setLocalData }, fetchProject] = useApi.get('/project');
@@ -38,7 +37,6 @@ const Project = () => {
   return (
     <ProjectPage>
       <NavbarLeft
-        issueSearchModalOpen={issueSearchModalHelpers.open}
         issueCreateModalOpen={issueCreateModalHelpers.open}
       />
 

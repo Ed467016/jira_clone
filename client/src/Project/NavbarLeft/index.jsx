@@ -6,7 +6,6 @@ import { Icon, AboutTooltip } from 'shared/components';
 import { NavLeft, LogoLink, StyledLogo, Bottom, Item, ItemText } from './Styles';
 
 const propTypes = {
-  issueSearchModalOpen: PropTypes.func.isRequired,
   issueCreateModalOpen: PropTypes.func.isRequired,
 };
 

@@ -11,51 +11,56 @@
       "issues": [{
         "id": 162,
         "candidate": {
+          "id": 1,
           "fullName": "Pickle Rick",
           "mobile": "+(123) 45-67-89-00",
           "email": "rick@jira.guest"
         },
-        "status": "In Progress",
+        "status": 1,
         "createdAt": "2020-07-16T11:57:45.971Z",
         "projectId": 21
       }, {
         "id": 166,
         "candidate": {
+          "id": 1,
           "fullName": "Pickle Rick",
           "mobile": "+(123) 45-67-89-00",
           "email": "rick@jira.guest"
         },
-        "status": "In Progress",
+        "status": 2,
         "createdAt": "2020-07-16T11:57:45.971Z",
         "projectId": 21
       }, {
         "id": 164,
         "candidate": {
+          "id": 1,
           "fullName": "Pickle Rick",
           "mobile": "+(123) 45-67-89-00",
           "email": "rick@jira.guest"
         },
-        "status": "In Progress",
+        "status": 3,
         "createdAt": "2020-07-16T11:57:45.971Z",
         "projectId": 21
       }, {
         "id": 161,
         "candidate": {
+          "id": 1,
           "fullName": "Pickle Rick",
           "mobile": "+(123) 45-67-89-00",
           "email": "rick@jira.guest"
         },
-        "status": "In Progress",
+        "status": 4,
         "createdAt": "2020-07-16T11:57:45.971Z",
         "projectId": 21
       }, {
         "id": 168,
         "candidate": {
+          "id": 1,
           "fullName": "Pickle Rick",
           "mobile": "+(123) 45-67-89-00",
           "email": "rick@jira.guest"
         },
-        "status": "In Progress",
+        "status": 5,
         "createdAt": "2020-07-16T11:57:45.971Z",
         "projectId": 21
       }]
@@ -64,6 +69,22 @@
   "post/project/issue": {
     "days": 26,
     "cost": 500
+  },
+  "get/issues/5": {
+    "id": 5,
+    "candidate": {
+      "id": 1,
+      "fullName": "Pickle Rick",
+      "mobile": "+(123) 45-67-89-00",
+      "email": "rick@jira.guest",
+      "url": "https://en.wikipedia.org/wiki/Pickle_Rick",
+      "downloadUrl": "http://africau.edu/images/default/sample.pdf"
+    },
+    "status": 1,
+    "createdAt": "2020-07-16T11:57:45.971Z",
+    "projectId": 21,
+    "cost": 500,
+    "endDate": "2020-09-16T11:57:45.971Z"
   },
   "get/currentUser": {
     "currentUser": {
@@ -78,5 +99,31 @@
   },
   "post/authentication/signIn": {
     "authToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjY1LCJpYXQiOjE1OTUyMzUyMzMsImV4cCI6MTYxMDc4NzIzM30.2upFPHqz42LD2bcb03PrdP4oGnewforAaDlskSE3d10"
-  }
+  },
+  "checkTypes": [{
+      "id": 1,
+      "name": "On Hold",
+      "color": "#ff0000a1"
+    },
+    {
+      "id": 2,
+      "name": "Disceperancy Found",
+      "color": "#0000ffa1"
+    },
+    {
+      "id": 3,
+      "name": "In Progress",
+      "color": "#808080a1"
+    },
+    {
+      "id": 4,
+      "name": "Under Review",
+      "color": "#008000a1"
+    },
+    {
+      "id": 5,
+      "name": "Completed",
+      "color": "#ffff00a1"
+    }
+  ]
 }

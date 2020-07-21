@@ -4,13 +4,13 @@ import { FieldArray } from 'formik';
 import { cloneDeep } from 'lodash';
 
 import useApi from 'shared/hooks/api';
-import toast from 'shared/utils/toast';
 import { Form } from 'shared/components';
+import toast from 'shared/utils/toast';
+import config from 'shared/utils/mock.data.json';
 
 import CheckTypes from './CheckTypes';
 import CandidateDetails from './CandidateDetails';
 import PricingResults from './PricingResults';
-import config from './config.json';
 
 import { FormHeading, FormElement, Divider, Actions, ActionButton, FieldLabel } from './Styles';
 
@@ -28,9 +28,9 @@ const ProjectIssueCreate = ({ project, fetchProject, modalClose }) => {
     <Form
       enableReinitialize
       initialValues={{
-        fullName: 'asd',
-        mobile: '+(123) 45-67-89-00',
-        email: 'admin@gmail.com',
+        fullName: '',
+        mobile: '',
+        email: '',
         checkTypes: cloneDeep(config.checkTypes),
       }}
       isSubmitting={isCreating}
@@ -41,12 +41,13 @@ const ProjectIssueCreate = ({ project, fetchProject, modalClose }) => {
       }}
       onSubmit={async (values, form) => {
         try {
-          const checkTypes = values.checkTypes.filter(q => q.checked).map(q => q.name);
+          const checkTypes = values.checkTypes.filter(q => q.checked).map(q => q.id);
           await createIssue({
             ...values,
             checkTypes,
             projectId: project.id
           });
+          form.resetForm();
           toast.success('Issue has been successfully created.');
           await fetchProject();
         } catch (error) {

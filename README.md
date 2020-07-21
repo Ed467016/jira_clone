@@ -12,7 +12,9 @@ Replace ```api.mock.js``` usage with ```api.js``` in ```/shared/hooks/api/mutati
 
 [/authentication/signIn](#)(POST)
 
-description: Authenticates user
+description: 
+
+Authenticates user
 
 params: 
 
@@ -28,7 +30,9 @@ returns:
 
 [/currentUser](#)(GET)
 
-description: Gets current logged in user
+description: 
+
+Gets current logged in user
 
 params: 
 
@@ -50,7 +54,9 @@ returns:
 
 [/project](#)(GET)
 
-description: Gets current project info
+description:
+
+Gets current project info
 
 params: 
 
@@ -83,7 +89,13 @@ returns:
 
 [/project/issue](#)(post)
 
-description: Creates new issue
+description:
+
+Creates new issue
+
+notes:
+
+Sends selected checks ids based on IssueCreate/config.json ids.
 
 params: 
 
@@ -95,6 +107,6 @@ returns:
   email: string,
   mobile: string,
   projectId: number,
-  checkTypes: Array -> string
+  checkTypes: Array -> number
 }
 ```

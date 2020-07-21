@@ -3,12 +3,24 @@ import PropTypes from 'prop-types';
 import { useRouteMatch } from 'react-router-dom';
 import { Draggable } from 'react-beautiful-dnd';
 
+import config from 'shared/utils/mock.data.json';
+
 import { IssueLink, Issue, Label, Left, Right } from './Styles';
 
 const propTypes = {
   issue: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
 };
+
+const checksMapping = () => {
+  const res = {};
+  for (const check of config.checkTypes) {
+    res[check.id] = check;
+  }
+
+  return res;
+}
+const mappings = checksMapping();
 
 const ProjectBoardListIssue = ({ issue, index }) => {
   const match = useRouteMatch();
@@ -23,7 +35,7 @@ const ProjectBoardListIssue = ({ issue, index }) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <Issue isBeingDragged={snapshot.isDragging && !snapshot.isDropAnimating}>
+          <Issue bgColor={mappings[issue.status]} isBeingDragged={snapshot.isDragging && !snapshot.isDropAnimating}>
             <Left>
               <Label>{issue.candidate.fullName}</Label>
               <Label>{issue.candidate.mobile}</Label>
@@ -31,7 +43,7 @@ const ProjectBoardListIssue = ({ issue, index }) => {
             </Left>
             <Right>
               <Label>Status</Label>
-              <Label>{issue.status}</Label>
+              <Label>{mappings[issue.status].name}</Label>
             </Right>
           </Issue>
         </IssueLink>

@@ -6,24 +6,24 @@ import { List, Title, IssuesCount, Issues } from './Styles';
 
 const propTypes = {
   status: PropTypes.string.isRequired,
-  project: PropTypes.object.isRequired
+  issues: PropTypes.array.isRequired
 };
 
-const ProjectBoardList = ({ status, project }) => {
+const ProjectBoardList = ({ status, issues }) => {
   return (
     <Droppable key={status} droppableId={status}>
       {provided => (
         <List>
           <Title>
             Issues
-            <IssuesCount>{project.issues.length}</IssuesCount>
+            <IssuesCount>{issues.length}</IssuesCount>
           </Title>
           <Issues
             {...provided.droppableProps}
             ref={provided.innerRef}
             data-testid={`board-list:${status}`}
           >
-            {project.issues.map((issue, index) => (
+            {issues.map((issue, index) => (
               <Issue key={issue.id} issue={issue} index={index} />
             ))}
             {provided.placeholder}

@@ -28,7 +28,7 @@ export const Issue = styled.div`
     css`
       transform: rotate(3deg);
       box-shadow: 5px 10px 30px 0px rgba(9, 30, 66, 0.15);
-    `}
+  `}
 `;
 
 export const Title = styled.p`
@@ -42,12 +42,13 @@ export const Title = styled.p`
 export const Label = styled.p`
   ${font.medium}
   color: ${color.textMedium};
-  text-align: center;
   ${font.size(18)}
 `;
 
 export const Left = styled.div`
+  text-align: center;
 `;
 
 export const Right = styled.div`
+  text-align: right;
 `;

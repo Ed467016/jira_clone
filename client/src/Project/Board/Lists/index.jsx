@@ -7,11 +7,11 @@ import List from './List';
 import { Lists } from './Styles';
 
 const propTypes = {
-  project: PropTypes.object.isRequired,
+  issues: PropTypes.array.isRequired,
   updateLocalProjectIssues: PropTypes.func.isRequired,
 };
 
-const ProjectBoardLists = ({ project, updateLocalProjectIssues }) => {
+const ProjectBoardLists = ({ issues, updateLocalProjectIssues }) => {
   const handleIssueDrop = ({ draggableId, destination, source }) => {
     if (!isPositionChanged(source, destination)) return;
 
@@ -20,9 +20,9 @@ const ProjectBoardLists = ({ project, updateLocalProjectIssues }) => {
     api.optimisticUpdate(`/issues/${issueId}`, {
       updatedFields: {
         status: destination.droppableId,
-        listPosition: calculateIssueListPosition(project.issues, destination, source, issueId),
+        listPosition: calculateIssueListPosition(issues, destination, source, issueId),
       },
-      currentFields: project.issues.find(({ id }) => id === issueId),
+      currentFields: issues.find(({ id }) => id === issueId),
       setLocalData: fields => updateLocalProjectIssues(issueId, fields),
     });
   };
@@ -30,7 +30,7 @@ const ProjectBoardLists = ({ project, updateLocalProjectIssues }) => {
   return (
     <DragDropContext onDragEnd={handleIssueDrop}>
       <Lists>
-        <List project={project} />
+        <List issues={issues} />
       </Lists>
     </DragDropContext>
   );

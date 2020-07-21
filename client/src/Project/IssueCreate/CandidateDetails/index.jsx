@@ -11,6 +11,7 @@ const CandidateDetails = () => {
         placeholder="John Johnson"
       />
       <Form.Field.Input
+        disabled
         name="mobile"
         label="Mobile Number"
         tip="Candidates mobile number."
