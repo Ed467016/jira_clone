@@ -1,10 +1,7 @@
 ### Used APIs that must be developed and replaced in the client app
 
 # JFI
-All mock objects presented in 
-```
-/shared/utils/mock.data.json
-```.
+All mock objects presented in ```/shared/utils/mock.data.json```
 Replace ```api.mock.js``` usage with ```api.js``` in ```/shared/hooks/api/mutation.js``` and ```/shared/hooks/api/query.js```
 
 Search for ```// REPLACE::``` for replacements
