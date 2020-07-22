@@ -66,6 +66,40 @@
       }]
     }
   },
+  "get/project?queried": {
+    "project": {
+      "id": 21,
+      "name": "singularity 1.0",
+      "url": "https://www.atlassian.com/software/jira",
+      "description": "Plan, track, and manage your agile and software development projects in Jira. Customize your workflow, collaborate, and release great software.",
+      "category": "software",
+      "createdAt": "2020-07-16T11:57:46.031Z",
+      "updatedAt": "2020-07-16T11:57:46.031Z",
+      "issues": [{
+        "id": 162,
+        "candidate": {
+          "id": 1,
+          "fullName": "Pickle Rick",
+          "mobile": "+(123) 45-67-89-00",
+          "email": "rick@jira.guest"
+        },
+        "status": 1,
+        "createdAt": "2020-07-16T11:57:45.971Z",
+        "projectId": 21
+      }, {
+        "id": 168,
+        "candidate": {
+          "id": 1,
+          "fullName": "Pickle Rick",
+          "mobile": "+(123) 45-67-89-00",
+          "email": "rick@jira.guest"
+        },
+        "status": 5,
+        "createdAt": "2020-07-16T11:57:45.971Z",
+        "projectId": 21
+      }]
+    }
+  },
   "post/project/issue": {
     "days": 26,
     "cost": 500

@@ -1,10 +1,12 @@
+import { values } from 'lodash';
+
 import toast from 'shared/utils/toast';
 import data from './mock.data.json';
 
-const api = (method, url) =>
-  new Promise((resolve) => {
-    resolve(data[method.concat(url)]);
-  });
+const api = (method, url, variables) =>
+  Promise.resolve(
+    data[method.concat(url).concat(values(variables).some(x => x) && values(variables.params).some(x => x) ? '?queried' : '')]
+  );
 
 const optimisticUpdate = async (url, { updatedFields, currentFields, setLocalData }) => {
   try {

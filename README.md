@@ -7,6 +7,7 @@ All mock objects presented in
 ```.
 Replace ```api.mock.js``` usage with ```api.js``` in ```/shared/hooks/api/mutation.js``` and ```/shared/hooks/api/query.js```
 
+Search for ```// REPLACE::``` for replacements
 
 # Endpoints
 
@@ -75,6 +76,7 @@ returns:
     issues: Array -> [{
       id: number,
       candidate: object -> {
+        id: number,
         fullName: string,
         mobile: string,
         email: string,
@@ -87,7 +89,44 @@ returns:
 }
 ```
 
-[/project/issue](#)(post)
+
+[/project?[filter1=filter1-value&filter2=filter2-value]](#)(GET)
+
+description:
+
+Gets current project info with filters applied
+
+params: 
+
+returns: 
+
+```
+{
+  project: object -> {
+    id: number,
+    name: string,
+    url: string,
+    description: string,
+    category: string,
+    createdAt: datetime,
+    updatedAt: datetime,
+    issues: Array -> [{
+      id: number,
+      candidate: object -> {
+        id: number,
+        fullName: string,
+        mobile: string,
+        email: string,
+      }
+      status: string,
+      createdAt: datetime,
+      projectId: number
+    }
+  }
+}
+```
+
+[/project/issue](#)(POST)
 
 description:
 
@@ -108,5 +147,39 @@ returns:
   mobile: string,
   projectId: number,
   checkTypes: Array -> number
+}
+```
+
+[/issues/{id: number}](#)(GET)
+
+description:
+
+Gets all info about issue by id
+
+notes:
+
+Url field in candidate object is the additional details url.
+DownloadUrl is url where details PDF is located.
+
+params: 
+
+returns: 
+
+```
+{
+  id: 5,
+   candidate: {
+    id: number,
+    fullName: string,
+    mobile: string,
+    email: string,
+    url: string,
+    downloadUrl: string
+  },
+  status: number,
+  createdAt: datetime,
+  projectId: number,
+  cost: number,
+  endDate: datetime
 }
 ```

@@ -22,7 +22,7 @@ const ProjectBoardFilters = ({ defaultFilters, filters, mergeFilters }) => {
     <Filters data-testid="board-filters">
       <SearchInput
         icon="search"
-        value={searchTerm}
+        value={searchTerm || ''}
         onChange={value => mergeFilters({ searchTerm: value })}
       />
       {!areFiltersCleared && (

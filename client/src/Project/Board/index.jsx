@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Route, useRouteMatch, useHistory } from 'react-router-dom';
 
@@ -21,20 +21,20 @@ const defaultFilters = {
   searchTerm: undefined,
 };
 
-let callback;
-
 const ProjectBoard = ({ project, fetchProject, updateLocalProjectIssues }) => {
   const match = useRouteMatch();
   const history = useHistory();
 
-  const [filters, mergeFilters] = useMergeState(defaultFilters);
-  if (!callback) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    callback = useFilterQuery(filters, fetchProject);
-  }
+  const filterQuery = useFilterQuery(fetchProject);
+  // eslint-disable-next-line prefer-const
+  let [filters, mergeFilters] = useMergeState(defaultFilters);
+  const mergeFiltersCopy = mergeFilters;
 
-  callback();
-  
+  mergeFilters = useCallback(newState => {
+    mergeFiltersCopy(newState);
+    filterQuery(newState);
+  }, [filterQuery, mergeFiltersCopy]);
+
   return (
     <Fragment>
       <Breadcrumbs items={['Projects', project.name, 'Kanban Board']} />

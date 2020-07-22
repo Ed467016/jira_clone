@@ -1,8 +1,4 @@
-import { useCallback } from 'react';
-
-const useFilterQuery = (filters, request) => {
-  return useCallback(() => {
-    debugger
+const useFilterQuery = (request) => (filters) => {
     const params = { params:{} };
     for (const key in filters) {
       if(filters[key]) {
@@ -12,9 +8,6 @@ const useFilterQuery = (filters, request) => {
     }
   
     request(params);
-  },
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  [filters]);
 };
 
 export default useFilterQuery;

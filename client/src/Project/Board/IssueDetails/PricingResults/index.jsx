@@ -1,7 +1,10 @@
 import React from 'react';
+
+import { formatDateTime } from 'shared/utils/dateTime';
+
 import { Container, Result, ResultLabel, Label } from './Styles';
 
-const PricingResults = ({ cost, days }) => {
+const PricingResults = ({ cost, endDate }) => {
   return (
     <Container>
       <Result>
@@ -9,8 +12,8 @@ const PricingResults = ({ cost, days }) => {
         <ResultLabel>{cost ? `Rs. ${cost}` : 'Not estimated yet.'}</ResultLabel>
       </Result>
       <Result>
-        <Label>Estimated Turnaround Time:</Label>
-        <ResultLabel>{days ? `${days} Days` : 'Not estimated yet.'}</ResultLabel>
+        <Label>Estimated Completion Date:</Label>
+        <ResultLabel>{endDate ? `${formatDateTime(endDate)}` : 'Not estimated yet.'}</ResultLabel>
       </Result>
     </Container>
   );

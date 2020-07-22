@@ -48,7 +48,7 @@ const ProjectBoardIssueDetails = ({ issueId }) => {
           <FieldLabel>Candidate Details</FieldLabel>
           <CandidateDetails url={data.candidate.url} downloadUrl={data.candidate.downloadUrl} />
           <Divider />
-          <PricingResults cost={data.cost} days={data.endDate} />
+          <PricingResults cost={data.cost} endDate={data.endDate} />
           <Footer />
         </FormElement>
       </Form>
