@@ -1,40 +1,27 @@
 import styled from 'styled-components';
 
 import { color, font } from 'shared/utils/styles';
+import { Form } from 'shared/components';
 
-export const Content = styled.div`
-  display: flex;
-  padding: 0 30px 60px;
+export const FormElement = styled(Form.Element)`
+  padding: 25px 40px 35px;
 `;
 
-export const Left = styled.div`
-  width: 65%;
-  padding-right: 50px;
+export const FormHeading = styled.div`
+  padding-bottom: 15px;
+  ${font.size(21)}
 `;
 
-export const Right = styled.div`
-  width: 35%;
-  padding-top: 5px;
-`;
-
-export const TopActions = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 21px 18px 0;
-`;
-
-export const TopActionsRight = styled.div`
-  display: flex;
-  align-items: center;
-  & > * {
-    margin-left: 4px;
-  }
-`;
-
-export const SectionTitle = styled.div`
-  margin: 24px 0 5px;
-  text-transform: uppercase;
+export const FieldLabel = styled.label`
+  display: block;
+  padding-bottom: 5px;
   color: ${color.textMedium};
-  ${font.size(12.5)}
-  ${font.bold}
+  margin-top: 20px;
+  ${font.medium}
+  ${font.size(18)}
+`;
+
+export const Divider = styled.div`
+  margin-top: 22px;
+  border-top: 1px solid ${color.borderLightest};
 `;

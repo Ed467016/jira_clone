@@ -1,24 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DragDropContext } from 'react-beautiful-dnd';
-
-import useCurrentUser from 'shared/hooks/currentUser';
 import api from 'shared/utils/api';
 import { moveItemWithinArray, insertItemIntoArray } from 'shared/utils/javascript';
-import { IssueStatus } from 'shared/constants/issues';
-
 import List from './List';
 import { Lists } from './Styles';
 
 const propTypes = {
-  project: PropTypes.object.isRequired,
-  filters: PropTypes.object.isRequired,
+  issues: PropTypes.array.isRequired,
   updateLocalProjectIssues: PropTypes.func.isRequired,
 };
 
-const ProjectBoardLists = ({ project, filters, updateLocalProjectIssues }) => {
-  const { currentUserId } = useCurrentUser();
-
+const ProjectBoardLists = ({ issues, updateLocalProjectIssues }) => {
   const handleIssueDrop = ({ draggableId, destination, source }) => {
     if (!isPositionChanged(source, destination)) return;
 
@@ -27,9 +20,9 @@ const ProjectBoardLists = ({ project, filters, updateLocalProjectIssues }) => {
     api.optimisticUpdate(`/issues/${issueId}`, {
       updatedFields: {
         status: destination.droppableId,
-        listPosition: calculateIssueListPosition(project.issues, destination, source, issueId),
+        listPosition: calculateIssueListPosition(issues, destination, source, issueId),
       },
-      currentFields: project.issues.find(({ id }) => id === issueId),
+      currentFields: issues.find(({ id }) => id === issueId),
       setLocalData: fields => updateLocalProjectIssues(issueId, fields),
     });
   };
@@ -37,15 +30,7 @@ const ProjectBoardLists = ({ project, filters, updateLocalProjectIssues }) => {
   return (
     <DragDropContext onDragEnd={handleIssueDrop}>
       <Lists>
-        {Object.values(IssueStatus).map(status => (
-          <List
-            key={status}
-            status={status}
-            project={project}
-            filters={filters}
-            currentUserId={currentUserId}
-          />
-        ))}
+        <List issues={issues} />
       </Lists>
     </DragDropContext>
   );

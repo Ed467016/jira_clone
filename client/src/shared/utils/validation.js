@@ -17,6 +17,10 @@ export const is = {
     // eslint-disable-next-line no-useless-escape
     !/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(value) &&
     'Must be a valid URL',
+
+  pattern: (pattern, message = '') => (value) => {
+    return !!value && !pattern.test(value) && `Must match ${message} pattern.`;
+  },
 };
 
 const isNilOrEmptyString = value => value === undefined || value === null || value === '';

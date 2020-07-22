@@ -1,13 +1,14 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Route, useRouteMatch, useHistory } from 'react-router-dom';
 
+import useFilterQuery from 'shared/hooks/filterQuery';
 import useMergeState from 'shared/hooks/mergeState';
 import { Breadcrumbs, Modal } from 'shared/components';
 
 import Header from './Header';
-import Filters from './Filters';
 import Lists from './Lists';
+import Filters from './Filters';
 import IssueDetails from './IssueDetails';
 
 const propTypes = {
@@ -17,31 +18,34 @@ const propTypes = {
 };
 
 const defaultFilters = {
-  searchTerm: '',
-  userIds: [],
-  myOnly: false,
-  recent: false,
+  searchTerm: undefined,
 };
 
 const ProjectBoard = ({ project, fetchProject, updateLocalProjectIssues }) => {
   const match = useRouteMatch();
   const history = useHistory();
 
-  const [filters, mergeFilters] = useMergeState(defaultFilters);
+  const filterQuery = useFilterQuery(fetchProject);
+  // eslint-disable-next-line prefer-const
+  let [filters, mergeFilters] = useMergeState(defaultFilters);
+  const mergeFiltersCopy = mergeFilters;
+
+  mergeFilters = useCallback(newState => {
+    mergeFiltersCopy(newState);
+    filterQuery(newState);
+  }, [filterQuery, mergeFiltersCopy]);
 
   return (
     <Fragment>
       <Breadcrumbs items={['Projects', project.name, 'Kanban Board']} />
       <Header />
       <Filters
-        projectUsers={project.users}
         defaultFilters={defaultFilters}
         filters={filters}
         mergeFilters={mergeFilters}
       />
       <Lists
-        project={project}
-        filters={filters}
+        issues={project.issues}
         updateLocalProjectIssues={updateLocalProjectIssues}
       />
       <Route
@@ -51,13 +55,11 @@ const ProjectBoard = ({ project, fetchProject, updateLocalProjectIssues }) => {
             isOpen
             testid="modal:issue-details"
             width={1040}
-            withCloseIcon={false}
+            withCloseIcon
             onClose={() => history.push(match.url)}
             renderContent={modal => (
               <IssueDetails
                 issueId={routeProps.match.params.issueId}
-                projectUsers={project.users}
-                fetchProject={fetchProject}
                 updateLocalProjectIssues={updateLocalProjectIssues}
                 modalClose={modal.close}
               />

@@ -1,7 +1,8 @@
 import { useRef, useCallback, useEffect } from 'react';
 import { isEqual } from 'lodash';
 
-import api from 'shared/utils/api';
+// REPLACE:: Api mock with actual api.
+import api from 'shared/utils/api.mock';
 import useMergeState from 'shared/hooks/mergeState';
 import useDeepCompareMemoize from 'shared/hooks/deepCompareMemoize';
 
@@ -34,7 +35,7 @@ const useQuery = (url, propsVariables = {}, options = {}) => {
       } else if (newVariables) {
         mergeState({ variables });
       }
-
+      
       api.get(url, apiVariables).then(
         data => {
           cache[url] = { data, apiVariables };

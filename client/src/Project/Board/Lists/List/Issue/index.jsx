@@ -3,20 +3,27 @@ import PropTypes from 'prop-types';
 import { useRouteMatch } from 'react-router-dom';
 import { Draggable } from 'react-beautiful-dnd';
 
-import { IssueTypeIcon, IssuePriorityIcon } from 'shared/components';
+import config from 'shared/utils/mock.data.json';
 
-import { IssueLink, Issue, Title, Bottom, Assignees, AssigneeAvatar } from './Styles';
+import { IssueLink, Issue, Label, Left, Right } from './Styles';
 
 const propTypes = {
-  projectUsers: PropTypes.array.isRequired,
   issue: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
 };
 
-const ProjectBoardListIssue = ({ projectUsers, issue, index }) => {
-  const match = useRouteMatch();
+const checksMapping = () => {
+  const res = {};
+  for (const check of config.checkTypes) {
+    res[check.id] = check;
+  }
 
-  const assignees = issue.userIds.map(userId => projectUsers.find(user => user.id === userId));
+  return res;
+}
+const mappings = checksMapping();
+
+const ProjectBoardListIssue = ({ issue, index }) => {
+  const match = useRouteMatch();
 
   return (
     <Draggable draggableId={issue.id.toString()} index={index}>
@@ -28,24 +35,16 @@ const ProjectBoardListIssue = ({ projectUsers, issue, index }) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <Issue isBeingDragged={snapshot.isDragging && !snapshot.isDropAnimating}>
-            <Title>{issue.title}</Title>
-            <Bottom>
-              <div>
-                <IssueTypeIcon type={issue.type} />
-                <IssuePriorityIcon priority={issue.priority} top={-1} left={4} />
-              </div>
-              <Assignees>
-                {assignees.map(user => (
-                  <AssigneeAvatar
-                    key={user.id}
-                    size={24}
-                    avatarUrl={user.avatarUrl}
-                    name={user.name}
-                  />
-                ))}
-              </Assignees>
-            </Bottom>
+          <Issue bgColor={mappings[issue.status]} isBeingDragged={snapshot.isDragging && !snapshot.isDropAnimating}>
+            <Left>
+              <Label>{issue.candidate.fullName}</Label>
+              <Label>{issue.candidate.mobile}</Label>
+              <Label>{issue.candidate.email}</Label>
+            </Left>
+            <Right>
+              <Label>Status</Label>
+              <Label>{mappings[issue.status].name}</Label>
+            </Right>
           </Issue>
         </IssueLink>
       )}
