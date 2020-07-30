@@ -4,7 +4,7 @@ import { Route, useRouteMatch, useHistory } from 'react-router-dom';
 
 import useFilterQuery from 'shared/hooks/filterQuery';
 import useMergeState from 'shared/hooks/mergeState';
-import { Breadcrumbs, Modal } from 'shared/components';
+import { Modal } from 'shared/components';
 
 import Header from './Header';
 import Lists from './Lists';
@@ -37,8 +37,7 @@ const ProjectBoard = ({ project, fetchProject, updateLocalProjectIssues }) => {
 
   return (
     <Fragment>
-      <Breadcrumbs items={['Projects', project.name, 'Kanban Board']} />
-      <Header />
+      <Header title={project.boardName} />
       <Filters
         defaultFilters={defaultFilters}
         filters={filters}

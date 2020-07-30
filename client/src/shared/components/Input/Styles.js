@@ -17,12 +17,11 @@ export const InputElement = styled.input`
   border-radius: 3px;
   border: 1px solid ${color.borderLightest};
   color: ${color.textDarkest};
-  background: ${color.backgroundLightest};
   transition: background 0.1s;
   ${font.regular}
   ${font.size(15)}
   ${props => props.hasIcon && 'padding-left: 32px;'}
-  &:hover {
+  &:disabled {
     background: ${color.backgroundLight};
   }
   &:focus {

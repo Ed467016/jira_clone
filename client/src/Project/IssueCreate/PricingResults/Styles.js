@@ -18,10 +18,7 @@ export const Label = styled.label`
   ${font.medium}
   ${font.size(18)}
   line-height: 40px;
-  background-color: #F4F5F7;
   padding: 5px;
-  border: 1px solid #dfe1e6;
-  border-radius:3px;
 `;
 
 export const ResultLabel = styled.label`

@@ -64,7 +64,7 @@ returns:
 {
   project: object -> {
     id: number,
-    name: string,
+    boardBame: string,
     url: string,
     description: string,
     category: string,
@@ -100,8 +100,8 @@ returns:
 ```
 {
   project: object -> {
-    id: number,
-    name: string,
+    id: number,    
+    boardBame: string,
     url: string,
     description: string,
     category: string,
